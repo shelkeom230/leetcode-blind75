@@ -386,3 +386,31 @@ class Solution:
         
         return dfs(0)
 ```
+# 25. moving robot
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        row=[1]*n
+
+        for i in range(m-1):
+            newRow=[1]*n
+            for j in range(n-2,-1,-1):
+                newRow[j]=newRow[j+1]+row[j]
+            row=newRow
+        return row[0]
+```
+# 26. jump game
+```python
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        # start from last
+        goal=len(nums)-1
+
+        for i in range(len(nums)-1,-1,-1):
+            #if the index plus value at index can reach the goal or beyond that
+            if i+nums[i]>=goal:
+                #update the goal index
+                goal=i
+                #goal reached then true otherwise false
+        return True if goal==0 else False
+```
