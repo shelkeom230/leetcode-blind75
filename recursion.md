@@ -223,3 +223,88 @@ n=len(arr)
 idx=0
 printSub(arr,sub,idx,n)
 ```
+# 15. print subsequences whose sum is equal to k
+```python
+def printS(idx,sub,s,target_sum,arr,n):
+	# idx reaches end of array
+	if idx==n:
+		# s becomes equal to target sum
+		if s==target_sum:
+			print([ele for ele in sub])
+		return
+
+	# take
+	sub.append(arr[idx])
+	s+=arr[idx]
+	printS(idx+1,sub,s,target_sum,arr,n)
+
+	# not to take 
+	sub.pop()
+	s-=arr[idx]
+	printS(idx+1,sub,s,target_sum,arr,n)
+	return sub
+arr=[1,2,1]
+n=len(arr)
+target_sum=2
+sub=[]
+printS(0,sub,0,target_sum,arr,n)
+```
+# 16. print only 1 subsequence which leads to sum k 
+```python
+def printS(idx,sub,s,target_sum,arr,n):
+	if idx==n:
+		if s==target_sum:
+			for ele in sub:
+				print(ele)
+			return True 
+		return False 
+
+	# take
+	sub.append(arr[idx])
+	s+=arr[idx]
+	if printS(idx+1,sub,s,target_sum,arr,n)==True:
+		return True	
+
+	# not to take 
+	sub.pop()
+	s-=arr[idx]
+	if printS(idx+1,sub,s,target_sum,arr,n)==True:
+		return True
+	return False
+
+arr=[1,2,1]
+n=len(arr)
+target_sum=2
+sub=[]
+printS(0,sub,0,target_sum,arr,n)
+```
+# 17. count subsequences with sum equal to k 
+```python
+def printS(idx,arr,n,s,sum):
+	# only when array contains positive
+	if s>sum: return 0
+	# when indx reached last
+	if idx==n:
+		# when s becomes equal to sum 
+		if s==sum:
+			return 1 
+		else:
+			return 0
+
+	# take 
+	s+=arr[idx]
+	l=printS(idx+1,arr,n,s,sum)
+
+	# not to take 
+	s-=arr[idx]
+	r=printS(idx+1,arr,n,s,sum)
+
+	return l+r
+arr=[1,2,1]
+n=len(arr)
+target_sum=2
+print(printS(0,arr,n,0,target_sum))
+```
+18. merge sort 
+```python
+```
