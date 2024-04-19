@@ -307,4 +307,102 @@ print(printS(0,arr,n,0,target_sum))
 ```
 18. merge sort 
 ```python
+def mergeSort(arr):
+    if len(arr)>1:
+        left_arr=arr[:len(arr)//2]
+        right_arr=arr[len(arr)//2:]
+
+        mergeSort(left_arr)
+        mergeSort(right_arr)
+
+        # merge 
+        i=0
+        j=0
+        k=0
+
+        while i<len(left_arr) and j<len(right_arr):
+            if left_arr[i]<right_arr[j]:
+                arr[k]=left_arr[i]
+                i+=1
+            else:
+                arr[k]=right_arr[j]
+                j+=1
+            k+=1
+        
+        while i<len(left_arr):
+            arr[k]=left_arr[i]
+            i+=1
+            k+=1
+        
+        while j<len(right_arr):
+            arr[k]=right_arr[j]
+            j+=1
+            k+=1
+
+arr=[10,3,2,2]
+mergeSort(arr)
+print(arr)
+```
+# 19. quick sort
+```python
+def quickSort(arr,low,high):
+	if low<high:
+		pindex=partition(arr,low,high)
+
+		quickSort(arr,low,pindex)
+		quickSort(arr,pindex+1,high)
+		return arr
+
+def partition(arr,low,high):
+	pivot=arr[low]
+	i=low
+	j=high
+
+	while i<j:
+		while arr[i]<=pivot and i<=high-1:
+			i+=1
+		while arr[j]>pivot and j>=low+1:
+			j-=1
+
+		if i<j:
+			arr[i],arr[j]=arr[j],arr[i]
+
+	arr[low],arr[j]=arr[j],arr[low]
+	return j
+
+arr=[3,2,1]
+low=0
+high=len(arr)-1
+print(quickSort(arr,low,high))
+```
+# 20. combination sum 
+```python
+from typing import List
+
+class Solution:
+    def function(self, idx, candidates, target, sub, result):
+        if idx == len(candidates):
+            if target == 0:
+                result.append(sub[:])
+            return
+
+        # Pick
+        if candidates[idx] <= target:
+            sub.append(candidates[idx])
+            self.function(idx, candidates, target - candidates[idx], sub, result)
+            sub.pop()
+
+        # Not Pick
+        self.function(idx + 1, candidates, target, sub, result)
+
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        self.function(0, candidates, target, [], result)
+        return result
+
+# Example usage:
+sol = Solution()
+candidates = [2, 3, 6, 7]
+target = 7
+print(sol.combinationSum(candidates, target))  # Output: [[2, 2, 3], [7]]
 ```
