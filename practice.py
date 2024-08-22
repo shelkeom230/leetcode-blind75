@@ -1,9 +1,10 @@
 # sum of first n numbers 
-def printSum(i,sum):
-	if i<1: 
-		print(sum)
-		return
-	return printSum(i-1,i+sum)
+def printSum(nums):
+    sum=0
+    for i in nums:
+        sum+=i 
+    return sum 
+    
 
-i=int(input("enter a number: "))
-printSum(i,0)
+nums=[1,2,3,4]
+print(printSum(nums))
